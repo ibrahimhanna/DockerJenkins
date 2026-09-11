@@ -16,13 +16,19 @@ stages {
 
     stage('Test') {
         steps {
-            sh './mvn clean test'
+           sh '''
+                    chmod +x mvnw
+                    ./mvnw clean test
+                '''
         }
     }
 
     stage('Package') {
         steps {
-            sh './mvn clean package -DskipTests'
+            sh '''
+                    chmod +x mvnw
+                    ./mvnw clean package -DskipTests
+                '''
         }
     }
 
