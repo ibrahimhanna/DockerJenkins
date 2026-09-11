@@ -16,13 +16,13 @@ stages {
 
     stage('Test') {
         steps {
-            sh './mvnw clean test'
+            sh './mvn clean test'
         }
     }
 
     stage('Package') {
         steps {
-            sh './mvnw clean package -DskipTests'
+            sh './mvn clean package -DskipTests'
         }
     }
 
