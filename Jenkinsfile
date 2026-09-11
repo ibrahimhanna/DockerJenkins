@@ -44,15 +44,13 @@ stages {
                 docker compose down
             docker compose up -d
 
-            echo "Waiting for containers..."
-            sleep 10
-
+            echo "=== Containers ==="
             docker compose ps
 
-            echo "Testing MySQL DNS..."
-            docker exec dockerjenkins-spring-app getent hosts mysql || true
+            echo "=== Networks ==="
+            docker network ls
 
-            echo "Spring Boot logs..."
+            echo "=== App logs ==="
             docker logs --tail=100 dockerjenkins-spring-app
             '''
         }
