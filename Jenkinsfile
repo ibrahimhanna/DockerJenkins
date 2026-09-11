@@ -41,17 +41,31 @@ stages {
     stage('Deploy') {
         steps {
             sh '''
-                docker compose down
+               set -x
+
+            echo "=== Docker version ==="
+            docker --version
+            docker compose version
+
+            echo "=== Current directory ==="
+            pwd
+            ls -la
+
+            echo "=== Docker Compose DOWN ==="
+            docker compose down
+
+            echo "=== Docker Compose UP ==="
             docker compose up -d
 
             echo "=== Containers ==="
             docker compose ps
 
-            echo "=== Networks ==="
+            echo "=== Docker networks ==="
             docker network ls
 
             echo "=== App logs ==="
             docker logs --tail=100 dockerjenkins-spring-app
+        
             '''
         }
     }
