@@ -42,7 +42,18 @@ stages {
         steps {
             sh '''
                 docker compose down
-                docker compose up -d
+            docker compose up -d
+
+            echo "Waiting for containers..."
+            sleep 10
+
+            docker compose ps
+
+            echo "Testing MySQL DNS..."
+            docker exec dockerjenkins-spring-app getent hosts mysql || true
+
+            echo "Spring Boot logs..."
+            docker logs --tail=100 dockerjenkins-spring-app
             '''
         }
     }
